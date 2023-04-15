@@ -35,13 +35,17 @@ button {
   border-radius: 5px;
 }
 
+a {
+  text-decoration: none;
+}
+
 button:hover {
   filter: brightness(150%);
   transition: 300ms;
   cursor: pointer;
 }
 
-input[type=text] {
+.input-style {
   font-family: Arial, sans-serif;
   font-size: 16px;
   color: #333;
@@ -85,7 +89,10 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 .card {
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   border: 2px solid white;
   width: 300px;
   margin-top: 20px;
@@ -197,4 +204,5 @@ input[type="file"]::-webkit-file-upload-button {
   background-color: transparent;
   border: 2px solid #0D28A6;
   color: #0D28A6;
+  border-radius: 5px;
 }

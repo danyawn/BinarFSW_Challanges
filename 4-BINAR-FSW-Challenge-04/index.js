@@ -1,9 +1,13 @@
 // import atau panggil package2 yg kita mau pakai di aplikasi kita
 const express = require("express");
 const path = require("path");
+const { Op } = require('sequelize')
 
 // manggil models/table disini
 const { productcars } = require("./models");
+
+const imagekit = require('./lib/imagekit');
+const upload = require('./middleware/uploader');
 
 // framework express = framework utk http server
 const app = express();
@@ -20,9 +24,29 @@ app.use(express.static(path.join(__dirname, "public")));
 // lihat semua produk dari database
 app.get("/", async (req, res) => {
   // get data dari database pake sequelize method findAll
-  const cars = await productcars.findAll();
 
-  // proses akhir = response yg render ejs file kalian
+
+  let cars;
+
+  console.log(req.params)
+  console.log(req.query)
+
+  if (req.query.filter) {
+    cars = await productcars.findAll({
+      where: {
+        size: {
+          [Op.substring]: req.query.filter
+        }
+      },
+      order: [['id', 'ASC']]
+    });
+  } else {
+    // get data dari database pake sequelize method findAll
+    cars = await productcars.findAll({
+      order: [['price', 'DESC']]
+    });
+  }
+
   res.render("crud/index", {
     cars,
   });
@@ -33,21 +57,33 @@ app.get("/cars/create", (req, res) => {
   res.render("crud/create");
 });
 
+
+
 // create car baru
-app.post("/cars", (req, res) => {
+app.post("/cars", upload.single('image'), async (req, res) => {
   // request body => req.body.name
   const { name, price, size } = req.body;
+  const file = req.file
 
-  // proses insert atau create data yg dari request body ke DB/tabel
-  // pakai sequelize method create utk proses data baru ke table/model nya
-  productcars.create({
+  // console.log('file foto', file)
+
+  const split = file.originalname.split('.');
+  const ext = split[split.length - 1];
+
+  const img = await imagekit.upload({
+    file: file.buffer,
+    fileName: `IMG-${Date.now()}.${ext}`
+  })
+
+  await productcars.create({
     name,
     price,
-    size,
-  });
+    size: req.body.size,
+    pict: img.url
+  })
 
   // response redirect page
-  res.redirect(201, "/");
+  res.redirect("/")
 });
 
 // render page edit cars
@@ -75,7 +111,7 @@ app.post("/cars/edit/:id", (req, res) => {
       name,
       price,
       size,
-      // size: req.body.size,
+      size: req.body.size,
     },
     {
       where: {
@@ -85,7 +121,7 @@ app.post("/cars/edit/:id", (req, res) => {
   );
 
   // response redirect page
-  res.redirect(200, "/");
+  res.redirect("/");
 });
 
 // delete produk
@@ -95,9 +131,10 @@ app.get("/cars/delete/:id", async (req, res) => {
     where: {
       id,
     },
-  });
+  })
+  res.redirect('/');
 
-  res.redirect(200, "/");
+
 });
 
 app.listen(PORT, () => {
