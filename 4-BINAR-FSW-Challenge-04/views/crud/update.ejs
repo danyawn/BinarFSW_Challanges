@@ -1,0 +1,19 @@
+<%- include("../partials/head") %>
+
+<body>
+    <h1>Update Car Information</h1>
+    <form action="/cars/edit/<%= productcarsDetail.id %>" method="POST">
+        <label for="">Nama</label>
+        <input type="text" name="name" placeholder="buku gambar" value="<%= productcarsDetail.name %>"><br>
+        <label for="">Sewa Per Hari</label>
+        <input type="text" name="price" placeholder="10000" value="<%= productcarsDetail.price %>"><br>
+        <label for="">Ukuran</label>
+        <select name="size" id="">
+            <% sizeOptions.map((size) => { %>
+                <option value="<%= size %>"><%= size %></option> 
+            <% }) %>
+        </select><br>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

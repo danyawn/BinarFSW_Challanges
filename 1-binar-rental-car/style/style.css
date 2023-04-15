@@ -1,0 +1,138 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.paraf {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+}
+
+.semi-header {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.paraf-2 {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+}
+
+.head2 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+}
+
+.margin-left {
+  margin-left: 136px;
+}
+
+.margin-right {
+  margin-right: 136px;
+}
+
+.blue-box {
+  width: 100px;
+  height: 34px;
+  background: #0d28a6;
+}
+
+.button-green {
+  padding: 8px 12px;
+  background: #5cb85f;
+  border-radius: 2px;
+  width: fit-content;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.button-green:hover {
+  background-color: #a3e3a6;
+}
+
+.nav {
+  padding-top: 24px;
+  width: 100%;
+}
+
+.banner-1 {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  background-color: #f1f3ff;
+}
+
+.banner-temp {
+  width: 100vw;
+  height: 100vh;
+}
+
+.back-car {
+  background-color: #102ca4;
+  height: 200px;
+  width: 700px;
+  border-radius: 100px 0px 0px;
+}
+.img-car {
+  width: 700px;
+  position: absolute;
+  z-index: 1;
+}
+
+.round-white {
+  padding: 5px;
+  border-radius: 100%;
+  background-color: #cfd4ed;
+}
+
+.round-temp {
+  padding: 5px;
+  border-radius: 100%;
+}
+
+.card-why {
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: #cfd4ed solid 2px;
+}
+
+.face-img {
+  border-radius: 100%;
+}
+
+.card-testi {
+  width: 619px;
+  height: 270px;
+  background-color: #f1f3ff;
+  border-radius: 8px;
+}
+
+.card-blue {
+  width: 1255px;
+  height: 326px;
+  background-color: #0d28a6;
+  border-radius: 13px;
+  color: white;
+}
+
+.footer {
+  display: flex;
+  gap: 86px;
+  justify-content: center;
+  margin-top: 150px;
+  margin-bottom: 150px;
+}
